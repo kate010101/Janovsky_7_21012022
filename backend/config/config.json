@@ -1,23 +1,23 @@
 {
     "development": {
-        "username": "root",
-        "password": "MyFirstSQL.P7.2022",
-        "database": "groupomania",
-        "host": "localhost",
+        "username": "DB_USERNAME",
+        "password": "DB_PASSWORD",
+        "database": "DB_NAME",
+        "host": "DB_HOST",
         "dialect": "mysql"
     },
     "test": {
-        "username": "root",
-        "password": "MyFirstSQL.P7.2022",
-        "database": "groupomania",
-        "host": "localhost",
+        "username": "DB_USERNAME",
+        "password": "DB_PASSWORD",
+        "database": "DB_NAME",
+        "host": "DB_HOST",
         "dialect": "mysql"
     },
     "production": {
-        "username": "root",
-        "password": "MyFirstSQL.P7.2022",
-        "database": "groupomania",
-        "host": "localhost",
+        "username": "DB_USERNAME",
+        "password": "DB_PASSWORD",
+        "database": "DB_NAME",
+        "host": "DB_HOST",
         "dialect": "mysql"
     }
 }

@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-body col d-flex justify-content-center">
       <main class="card-body">
-        <h2 class="card-title">Partagez vos intérêts avec votre communauté</h2>
+        <h2 class="card-title">partagez vos intérêts avec votre communauté</h2>
         <form
           class="container text-center form-group"
           @submit.prevent="addPost()"
@@ -11,7 +11,7 @@
         >
           <div class="mx-auto w-50 mb-3">
             <label for="content" class="form-label form-control-sm"
-              >Postez vos articles :
+              >Postez vos émotions :
             </label>
             <input
               type="text"
@@ -39,7 +39,7 @@
                 class="btn btn-primary"
                 @click.prevent="addPost"
               >
-                Poster
+                Postez
               </button>
             </div>
           </div>
@@ -50,6 +50,7 @@
 </template>
 <script>
 import axios from "axios";
+
 export default {
   name: "AddPost",
 
@@ -100,14 +101,6 @@ h2 {
   font-size: 1.2rem;
   font-weight: 600;
 }
-/*label{
-  display:block;
- float:left;
-  width:150px;
-}
-input{
- 
-}*/
 #btnP {
   margin-left: 5rem;
 }
