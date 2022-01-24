@@ -1,21 +1,37 @@
 <template>
-  <div class="container">
-    <div>
-      <NavProfile />
-    </div>
+  <div id="profile">
+    <NavApp />
+    <ProfileUser />
+    <div class="retour">
+      <router-link to="/posts"> Retour à l'Accueil</router-link>
 
-    <p>hello</p>
+      <Footer />
+    </div>
   </div>
 </template>
 
 <script>
-import NavProfile from "../components/NavProfile";
+import ProfileUser from "../components/ProfileUser.vue";
+import NavApp from "../components/NavApp.vue";
+import Footer from "../components/Footer.vue";
 export default {
   name: "Profile",
   components: {
-    NavProfile,
+    NavApp,
+    ProfileUser,
+    Footer,
+  },
+  data() {
+    return {
+      token: localStorage.getItem("token"),
+    };
   },
 };
 </script>
-
-<style scoped>
+<style scoped lang="scss">
+a {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+}
+</style> 

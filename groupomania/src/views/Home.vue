@@ -1,18 +1,53 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Login />
+    <p class="connect">
+      Vous n'avez pas un compte ?
+      <router-link
+        to="/signup"
+        class="toconnect"
+        role="button"
+        aria-label="s'inscrire"
+        >S'inscrire</router-link
+      >
+    </p>
+    <div>
+      <Footer />
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import Footer from "../components/Footer";
+import Login from "../components/Login";
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
-    HelloWorld
+    Login,
+    Footer,
+  },
+  data() {
+    return {
+      userId: localStorage.getItem("userId"),
+    };
+  },
+};
+</script>
+<style scoped lang="scss">
+.connect {
+  margin: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+}
+@media screen and(max-width: 340) {
+  .connect {
+    font-size: 1rem;
   }
 }
-</script>
+.toconnect {
+  cursor: pointer;
+  text-decoration: none;
+  color: red;
+}
+</style> 
