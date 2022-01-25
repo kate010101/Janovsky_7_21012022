@@ -2,7 +2,7 @@
 const bcrypt = require('bcrypt');
 require("dotenv").config();
 
-const getUserId = require('../utils/getUserId');
+const getAuthUserId = require('../utils/getAuthUserId');
 /*** modèle  ***/
 const db = require('../models')
 const User = db.User;
@@ -150,7 +150,7 @@ exports.updateProfile = (req, res, next) => {
             }
         })
         .then(user => {
-            if (user.id !== getUserId(req)) {
+            if (user.id !== getAuthUserId(req)) {
                 return res.status(401).json({
                     error
                 })
@@ -187,7 +187,7 @@ exports.deleteProfile = (req, res, next) => {
             }
         })
         .then(user => {
-            if (user.id !== getUserId(req)) {
+            if (user.id !== getAuthUserId(req)) {
                 return res.status(401).json({
                     error
                 })
@@ -260,7 +260,7 @@ exports.adminDeleteProfileUser = (req, res, next) => {
             }
         })
         .then(() => res.status(200).json({
-            message: 'Profil supprimé !'
+            message: 'Profil du user supprimé !'
         }))
         .catch(error => res.status(403).json({
             message: 'Requête réservée aux admins'
