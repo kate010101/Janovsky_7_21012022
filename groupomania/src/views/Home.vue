@@ -11,20 +11,16 @@
         >S'inscrire</router-link
       >
     </p>
-    <div>
-      <Footer />
-    </div>
   </div>
 </template>
 
 <script>
-import Footer from "../components/Footer";
 import Login from "../components/Login";
+
 export default {
   name: "Home",
   components: {
     Login,
-    Footer,
   },
   data() {
     return {

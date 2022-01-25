@@ -1,4 +1,4 @@
-  <template>
+ <template>
   <footer>
     <div class="text-center p-3">
       <span>© 2022 Copyright : </span>
@@ -20,8 +20,11 @@ export default {
 </script>
 <style scoped lang="scss">
 footer {
+  height: auto;
+  width: 100%;
   background-color: #122441;
-  margin-top: 13rem;
+  margin-top: 15rem;
+
   span,
   #lien {
     color: white;

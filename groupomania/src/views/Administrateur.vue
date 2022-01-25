@@ -14,7 +14,7 @@
             class="btn btn-secondary btn-profils"
             @click="profilesUsers = !profilesUsers"
           >
-            Profils
+            Comptes
           </button>
           <div v-if="profilesUsers">
             <div class="card-profilesList" v-for="user in users" :key="user.id">
@@ -69,7 +69,9 @@
       </div>
     </div>
     <div class="retour">
-      <router-link to="/posts"> Retour à l'Acceuil</router-link>
+      <router-link to="/posts"
+        ><i class="fas fa-hand-point-left"></i> Retour à l'Acceuil</router-link
+      >
     </div>
   </div>
 </template>
@@ -93,26 +95,11 @@ export default {
       user: {},
       posts: [],
       post: {},
-      content: {},
+      // content: {},
     };
   },
-  created() {
-    axios
-      .get("http://localhost:3000/api/posts", {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: "Bearer " + this.token,
-        },
-      })
-      .then((response) => {
-        this.posts = response.data.posts;
-        console.log(this.posts);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    axios
+  async created() {
+    await axios
       .get("http://localhost:3000/api/users", {
         headers: {
           "Content-Type": "application/json",
@@ -127,10 +114,25 @@ export default {
       .catch((error) => {
         console.log(error);
       });
+    await axios
+      .get("http://localhost:3000/api/posts", {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: "Bearer " + this.token,
+        },
+      })
+      .then((response) => {
+        this.posts = response.data.posts;
+        console.log(this.posts);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
   methods: {
-    deletePost(id) {
-      axios
+    async deletePost(id) {
+      await axios
         .delete(`http://localhost:3000/api/admin/delete/posts/${id}`, {
           headers: {
             "Content-Type": "application/json",

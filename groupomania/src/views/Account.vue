@@ -1,11 +1,15 @@
 <template>
-  <div id="profile">
+  <div>
     <NavApp />
     <ProfileUser />
     <div class="retour">
-      <router-link to="/posts"> Retour à l'Accueil</router-link>
-
-      <Footer />
+      <router-link
+        to="/posts"
+        alt="retour à la page accueil"
+        title="retour à la page accueil"
+        ><i class="fas fa-hand-point-left"></i>
+        Retour à l'Accueil
+      </router-link>
     </div>
   </div>
 </template>
@@ -13,13 +17,11 @@
 <script>
 import ProfileUser from "../components/ProfileUser.vue";
 import NavApp from "../components/NavApp.vue";
-import Footer from "../components/Footer.vue";
 export default {
   name: "Profile",
   components: {
     NavApp,
     ProfileUser,
-    Footer,
   },
   data() {
     return {

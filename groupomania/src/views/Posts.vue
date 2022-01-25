@@ -1,6 +1,7 @@
 <template>
   <div>
     <NavApp />
+    <h1 class="card-titlepost">Partagez vos intérêts avec votre communauté</h1>
     <AddPost />
     <InfoPost />
     <Footer />
@@ -30,4 +31,11 @@ export default {
 </script>
 
 <style lang="scss">
+.card-titlepost {
+  margin: 1rem;
+  text-align: center;
+  display: block;
+  background-color: #0dcaf0;
+  border-color: #0dcaf0;
+}
 </style> 
