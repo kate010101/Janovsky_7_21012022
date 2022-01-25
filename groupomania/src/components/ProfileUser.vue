@@ -102,6 +102,7 @@
 
 <script>
 import axios from "axios";
+
 export default {
   name: "ProfileUser",
   data() {
@@ -119,6 +120,7 @@ export default {
       image: "",
     };
   },
+
   created() {
     axios
       .get(`http://localhost:3000/api/users/${this.userId}`, {
@@ -134,6 +136,7 @@ export default {
         this.image = response.data.image;
       });
   },
+
   methods: {
     filePictureToUpload() {
       this.image = this.$refs.image.files[0];
@@ -147,10 +150,12 @@ export default {
       console.log(this.image);
       console.log(this.imageUrl);
       console.log("test-récup", formData.get("imageUrl"));
+
       axios
         .put(`http://localhost:3000/api/users/${this.userId}`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
+            Accept: "multipart/form-data",
             Authorization: "Bearer " + this.token,
           },
         })
@@ -164,6 +169,7 @@ export default {
         .delete(`http://localhost:3000/api/users/${id}`, {
           headers: {
             "Content-Type": "application/json",
+            Accept: "application/json",
             Authorization: "Bearer " + this.token,
           },
         })

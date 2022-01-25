@@ -8,6 +8,15 @@ const path = require("path");
 const app = express(); /*** appeler express pour créer notre application express ***/
 
 
+/*** Middleware général/ configurer des Headers sur l'objet réponse pour eviter les erreurs du CORS (Cross Origin Resource Sharing)
+    et assurer que le front-end pourra effectuer des appels vers l'application en toute sécurité.  ***/
+
+    app.use((req, res, next) => {
+        res.setHeader('Access-Control-Allow-Origin', '*'); /*** d'accéder à notre API depuis n'importe quelle origine ***/
+        res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization'); /*** d'ajouter les headers mentionnés aux requêtes envoyées vers notre API ***/
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS'); /*** d'envoyer des requêtes avec les méthodes mentionnées  ***/
+        next();
+    });
 
 /*** importer les routes à notre application ***/
 /*** importer la route user ***/
@@ -17,16 +26,12 @@ const postRoutes = require('./routes/post');
 /*** importer la route user ***/
 const commentRoutes = require('./routes/comment');
 
-/*** importer la route user ***/
-/*** Middleware général/ configurer des Headers sur l'objet réponse pour eviter les erreurs du CORS (Cross Origin Resource Sharing)
-    et assurer que le front-end pourra effectuer des appels vers l'application en toute sécurité.  ***/
 
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*'); /*** d'accéder à notre API depuis n'importe quelle origine ***/
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization'); /*** d'ajouter les headers mentionnés aux requêtes envoyées vers notre API ***/
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS'); /*** d'envoyer des requêtes avec les méthodes mentionnées  ***/
-    next();
-});
+const db=require("./models/index.js");
+    db.sequelize.sync({ force: false }).then(() => {
+    console.log("Drop and Resync with { force: true }");
+});  
+
 
 /*** transformation du corps de la requête en objet Javascript utilisable ***/
 app.use(bodyParser.json());

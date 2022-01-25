@@ -129,7 +129,7 @@ exports.createPost = (req, res, next) => {
          }))
  
  };
- /*exports.adminDeletePost = (req, res, next) => {
+ exports.adminDeletePost = (req, res, next) => {
      Post.findOne({
              where: {
                  id: req.params.id
@@ -151,4 +151,4 @@ exports.createPost = (req, res, next) => {
                      }))
              })
          });
- }; */
+ }; 

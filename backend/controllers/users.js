@@ -40,7 +40,6 @@ exports.signup = async (req, res, next) => {
             .then(hash => {
 
                 User.create({
-                        id: req.body.id,
                         firstName: req.body.firstName,
                         lastName: req.body.lastName,
                         email: req.body.email,
@@ -50,10 +49,10 @@ exports.signup = async (req, res, next) => {
                     })
 
                     .then((user) => res.status(201).json({
-                        userId: user.id,
+                        userId: user.userId,
                         isAdmin: user.isAdmin,
                         token: jwt.sign({
-                                userId: user.id,
+                                userId: user.userId,
                                 isAdmin: user.isAdmin,
                             },
                             `${process.env.SECRET_KEY}`, {
@@ -253,7 +252,7 @@ exports.getAllProfiles = (req, res, next) => {
 
 };
 
-exports.adminDeleteProfile = (req, res, next) => {
+exports.adminDeleteProfileUser = (req, res, next) => {
 
     User.destroy({
             where: {
@@ -266,4 +265,5 @@ exports.adminDeleteProfile = (req, res, next) => {
         .catch(error => res.status(403).json({
             message: 'Requête réservée aux admins'
         }))
+    console.log(User.destroy)    
 }; 
