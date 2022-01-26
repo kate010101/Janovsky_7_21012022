@@ -1,5 +1,5 @@
 <template>
-  <div class="blocComment" v-bind="$attrs">
+  <div class="blocComment">
     <form class="mt-3">
       <input
         v-bind="$attrs"
@@ -44,9 +44,8 @@ export default {
         content: this.$refs.content.value,
 
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
           Authorization: "Bearer " + this.token,
+          "Content-Type": "application/json",
         },
       });
     },

@@ -12,12 +12,13 @@
         <div class="card-btn">
           <h2 class="card-title-profiles">1-Les comptes personnels</h2>
           <div>
-            <div class="card-profilesList" v-for="user in users" :key="user.id">
+            <div class="card-profilesList" :key="user.id" v-for="user in users">
               <ProfilesList v-bind="user" />
             </div>
           </div>
           <h2 class="card-title-profiles">2-Publications</h2>
           <div>
+            <!-- On récupére les posts des plus récents aux plus anciens -->
             <div
               class="card-postsList"
               v-for="post in posts.slice().reverse()"
@@ -58,11 +59,6 @@
         </div>
       </div>
     </div>
-    <div class="retour">
-      <router-link to="/posts"
-        ><i class="fas fa-hand-point-left"></i> Retour à l'Acceuil</router-link
-      >
-    </div>
   </div>
 </template>
 
@@ -89,8 +85,6 @@ export default {
     await axios
       .get("http://localhost:3000/api/users", {
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
           Authorization: "Bearer " + this.token,
         },
       })
@@ -104,8 +98,6 @@ export default {
     await axios
       .get("http://localhost:3000/api/posts", {
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
           Authorization: "Bearer " + this.token,
         },
       })
@@ -122,11 +114,9 @@ export default {
       await axios
         .delete(`http://localhost:3000/api/admin/delete/posts/${id}`, {
           headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
             Authorization: "Bearer " + this.token,
           },
-        })
+        }) /**** actualiser la page parcourir zéro page dans l'histoire(windows.history) ***/
         .then(() => this.$router.go(0));
     },
   },
@@ -171,13 +161,6 @@ export default {
 .card-postsList {
   display: flex;
   flex-direction: column;
-}
-a {
-  display: block;
-  text-align: center;
-  margin: 1.5rem;
-  text-decoration: none;
-  font-weight: 600;
 }
 .card-text {
   margin: 1rem;

@@ -86,10 +86,10 @@ export default {
       await axios
         .post("http://localhost:3000/api/posts", formData, {
           headers: {
+            Authorization: "Bearer " + this.token,
             "Content-Type": "multipart/form-data",
-            Accept: "multipart/form-data",
           },
-        })
+        }) /**** actualiser la page parcourir zéro page dans l'histoire(windows.history) ***/
         .then(() => this.$router.go(0));
     },
   },
