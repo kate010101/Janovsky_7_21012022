@@ -22,7 +22,7 @@ exports.createPost = (req, res, next) => {
          }))
  
  }
- /*** Modifier un post ***/
+ /*** Modifier une publication ***/
  exports.updatePost = (req, res, next) => {
      Post.findOne({
 
@@ -113,7 +113,7 @@ exports.createPost = (req, res, next) => {
      Post.findAll({
         include: [{
             model: User,
-            attributes: ['firstName', 'lastName']
+            attributes: ['firstName', 'lastName', 'imageUrl']
         }],
         order: [
             ['createdAt', 'DESC']
@@ -146,7 +146,7 @@ exports.createPost = (req, res, next) => {
                      .then(() => res.status(200).json({
                         message: 'Vous avez supprimé la publication du user'
                      }))
-                     .catch(error => res.status(403).json({
+                     .catch(error => res.status(400).json({
                          error
                      }))
              })

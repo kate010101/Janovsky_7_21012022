@@ -263,7 +263,7 @@ exports.adminDeleteProfileUser = (req, res, next) => {
             message: 'Profil du user supprimé !'
         }))
         .catch(error => res.status(403).json({
-            message: 'Requête réservée aux admins'
+            error
         }))
     console.log(User.destroy)    
 }; 
