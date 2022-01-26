@@ -7,13 +7,21 @@ fs = require('fs')
 
 /***Création  d'un commentaire ***/
 exports.createComment = (req, res, next) => {
+    if (!req.body.content) {
+        res.status(400).send({
+            message: "impossible de publier un commentaire vide !"
+        });
+    }
         Comment.create({
                 userId: req.body.userId,
                 postId: req.body.postId,
                 content: req.body.content
             })
             .then(() => res.status(201).json({
-                message: 'votre commentaire est créé !'
+                message: 'votre commentaire est créé !',
+                userId: req.body.userId,
+                postId: req.body.postId,
+                content: req.body.content
             }))
             .catch(error => res.status(400).json({
                 error,

@@ -13,16 +13,19 @@
           <h2 class="card-title-profiles">1-Les comptes personnels</h2>
           <div>
             <div class="card-profilesList" :key="user.id" v-for="user in users">
-              <ProfilesList v-bind="user" />
+              <ProfilesList
+                v-bind="user"
+                @deleteProfileUser="getDeleteUser()"
+              />
             </div>
           </div>
           <h2 class="card-title-profiles">2-Publications</h2>
           <div>
             <!-- On récupére les posts des plus récents aux plus anciens -->
             <div
+              :key="post.id"
               class="card-postsList"
               v-for="post in posts.slice().reverse()"
-              :key="post.id"
             >
               <div
                 class="card-header"
@@ -32,9 +35,18 @@
                 :key="user.id"
               >
                 <img
+                  v-if="user.imageUrl == null"
+                  src="../assets/icon-profil.png"
+                  alt="photo de profil provisoire"
+                  title="photo de profil"
+                  class="avatar"
+                />
+                <img
+                  v-else
                   :src="user.imageUrl"
                   class="avatar"
                   alt="profile picture"
+                  title="picture profile"
                 />
                 <span class="card-title2"
                   >{{ user.firstName }} {{ user.lastName }}</span
@@ -92,9 +104,11 @@ export default {
         this.users = response.data.users;
         console.log(this.users);
       })
-      .catch((error) => {
+      .catch(function (error) {
+        alert(error);
         console.log(error);
       });
+
     await axios
       .get("http://localhost:3000/api/posts", {
         headers: {
@@ -105,7 +119,8 @@ export default {
         this.posts = response.data.posts;
         console.log(this.posts);
       })
-      .catch((error) => {
+      .catch(function (error) {
+        alert(error);
         console.log(error);
       });
   },
@@ -116,8 +131,27 @@ export default {
           headers: {
             Authorization: "Bearer " + this.token,
           },
-        }) /**** actualiser la page parcourir zéro page dans l'histoire(windows.history) ***/
-        .then(() => this.$router.go(0));
+        })
+        .then(() => {
+          let i = this.posts.map((data) => data.id).indexOf(id);
+          this.posts.splice(i, 1);
+        });
+    },
+    async getDeleteUser() {
+      await axios
+        .get("http://localhost:3000/api/users", {
+          headers: {
+            Authorization: "Bearer " + this.token,
+          },
+        })
+        .then((response) => {
+          this.users = response.data.users;
+          console.log(this.users);
+        })
+        .catch(function (error) {
+          alert(error);
+          console.log(error);
+        });
     },
   },
 };

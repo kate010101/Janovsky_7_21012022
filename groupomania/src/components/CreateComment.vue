@@ -10,10 +10,12 @@
       />
       <span id="btn-publication">
         <button
-          v-bind="$attrs"
           type="submit"
+          title="créer"
+          aria-label="créer un commentaire"
           class="btn btn-primary"
-          @click="postComment()"
+          v-bind="$attrs"
+          @click.prevent="postComment()"
           ref="comment"
         >
           <i class="far fa-paper-plane"></i>
@@ -33,21 +35,31 @@ export default {
       post: {},
       postId: "",
       content: "",
-      comment: "",
+      comment: {},
+      comments: [],
     };
   },
   methods: {
     postComment() {
-      axios.post("http://localhost:3000/api/comments", {
-        userId: localStorage.getItem("userId"),
-        postId: this.$refs.comment.id,
-        content: this.$refs.content.value,
+      axios
+        .post("http://localhost:3000/api/comments", {
+          userId: localStorage.getItem("userId"),
+          postId: this.$refs.comment.id,
+          content: this.$refs.content.value,
 
-        headers: {
-          Authorization: "Bearer " + this.token,
-          "Content-Type": "application/json",
-        },
-      });
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + this.token,
+          },
+        })
+
+        .then(() => {
+          this.$emit("postCommentResponse");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      this.$refs.content.value = "";
     },
   },
 };

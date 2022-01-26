@@ -51,6 +51,9 @@
         </form>
       </main>
     </div>
+    <div v-if="error" class="alert alert-danger" role="altert" id="msgError">
+      {{ error }}
+    </div>
   </div>
 </template>
 <script>
@@ -66,6 +69,7 @@ export default {
       image: "",
       content: "",
       imageUrl: "",
+      error: "",
     };
   },
 
@@ -74,7 +78,7 @@ export default {
       this.image = this.$refs.image.files[0];
       this.imageUrl = URL.createObjectURL(this.image);
     },
-
+    /*** Créer une nouvelle publication ***/
     async addPost() {
       const formData = new FormData();
       formData.append("image", this.image);
@@ -83,15 +87,23 @@ export default {
       console.log("test", formData.get("image"));
       console.log("test", formData.get("content"));
 
-      await axios
-        .post("http://localhost:3000/api/posts", formData, {
-          headers: {
-            Authorization: "Bearer " + this.token,
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        /**** actualiser la page parcourir zéro page dans l'histoire(windows.history) ***/
-        .then(() => this.$router.go(0));
+      if (formData.get("content") == "") {
+        this.error = "Message vide";
+      } else {
+        await axios
+          .post("http://localhost:3000/api/posts", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: "Bearer " + this.token,
+            },
+          })
+          .then(() => {
+            this.$emit("postResponse");
+          })
+          .catch((error) => (this.msgError = error));
+        this.image = "";
+        this.content = "";
+      }
     },
   },
 };

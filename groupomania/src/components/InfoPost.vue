@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div v-if="user.isAdmin || userId">
+    <AddPost @postResponse="getPosts()" />
     <!-- On récupére les posts des plus récents aux plus anciens -->
     <div class="card" :key="post.id" v-for="post in posts.slice().reverse()">
       <div
@@ -10,10 +11,18 @@
         :key="user.id"
       >
         <img
-          :src="user.imageUrl || 'https://picsum.photos/300/200?random'"
-          class="avatar"
+          v-if="user.imageUrl == null"
+          src="../assets/icon-profil.png"
+          alt="photo de profil provisoire"
           title="photo de profil"
+          class="avatar"
+        />
+        <img
+          v-else
+          :src="user.imageUrl"
+          class="avatar"
           alt="profile picture"
+          title="picture profile"
         />
         <span class="card-title">{{ user.firstName }} {{ user.lastName }}</span>
       </div>
@@ -29,6 +38,8 @@
       <span class="btn-end" v-if="user.id == post.userId">
         <button
           class="btn btn-danger"
+          title="supprimer"
+          aria-label="bouton supprimer"
           v-bind="post"
           @click.prevent="deletePublication(post.id)"
         >
@@ -55,8 +66,9 @@
             >
               <img
                 v-if="user.imageUrl == null"
-                :src="'https://picsum.photos/300/200?random'"
+                src="../assets/icon-profil.png"
                 alt="photo de profil provisoire"
+                title="photo de profil"
                 class="rouned-circle mr-1 avatar"
               />
               <img
@@ -64,6 +76,7 @@
                 :src="user.imageUrl"
                 class="avatar"
                 alt="profile picture"
+                title="picture profile"
               />
               <span class="card-title"
                 >{{ user.firstName }} {{ user.lastName }}</span
@@ -73,6 +86,8 @@
             <div v-if="comment.userId == user.id" id="btn-trash">
               <button
                 class="btn-secondary"
+                title="supprimer le commentaire"
+                aria-label="bouton supprimer un commentaire"
                 @click.prevent="deleteComment(comment.id)"
               >
                 <i class="fa fa-trash" aria-hidden="true"></i>
@@ -80,7 +95,8 @@
             </div>
           </div>
         </div>
-        <CreateComment v-bind="post" />
+
+        <CreateComment v-bind="post" @postCommentResponse="getComments()" />
       </div>
     </div>
   </div>
@@ -89,10 +105,12 @@
 <script>
 import axios from "axios";
 import CreateComment from "../components/CreateComment.vue";
+import AddPost from "../components/AddPost.vue";
 export default {
   name: "infoPost",
   components: {
     CreateComment,
+    AddPost,
   },
   data() {
     return {
@@ -122,7 +140,8 @@ export default {
         this.users = response.data.users;
         console.log(this.users);
       })
-      .catch((error) => {
+      .catch(function (error) {
+        alert(error);
         console.log(error);
       });
     await axios
@@ -136,7 +155,8 @@ export default {
         this.posts = response.data.posts;
         console.log(this.posts);
       })
-      .catch((error) => {
+      .catch(function (error) {
+        alert(error);
         console.log(error);
       });
     await axios
@@ -150,7 +170,8 @@ export default {
         this.comments = response.data;
         console.log(this.comments);
       })
-      .catch((error) => {
+      .catch(function (error) {
+        alert(error);
         console.log(error);
       });
   },
@@ -166,8 +187,11 @@ export default {
             headers: {
               Authorization: "Bearer " + this.token,
             },
-          }) /**** actualiser la page parcourir zéro page dans l'histoire(windows.history) ***/
-          .then(() => this.$router.go(0));
+          })
+          .then(() => {
+            let i = this.posts.map((data) => data.id).indexOf(id);
+            this.posts.splice(i, 1);
+          });
       } else {
         return;
       }
@@ -180,14 +204,51 @@ export default {
         await axios
           .delete(`http://localhost:3000/api/comments/${id}`, {
             headers: {
-              Authorization: "Bearer " + this.token,
               "Content-Type": "application/json",
+              Authorization: "Bearer " + this.token,
             },
-          }) /**** actualiser la page parcourir zéro page dans l'histoire(windows.history) ***/
-          .then(() => this.$router.go(0));
+          })
+          .then(() => {
+            let i = this.comments.map((data) => data.id).indexOf(id);
+            this.comments.splice(i, 1);
+          });
       } else {
         return;
       }
+    },
+    async getComments() {
+      await axios
+        .get("http://localhost:3000/api/comments", {
+          headers: {
+            Authorization: "Bearer " + this.token,
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => {
+          this.comments = response.data;
+          console.log(this.comments);
+        })
+        .catch(function (error) {
+          alert(error);
+          console.log(error);
+        });
+    },
+    async getPosts() {
+      await axios
+        .get("http://localhost:3000/api/posts", {
+          headers: {
+            Authorization: "Bearer " + this.token,
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => {
+          this.posts = response.data.posts;
+          console.log(this.posts);
+        })
+        .catch(function (error) {
+          alert(error);
+          console.log(error);
+        });
     },
   },
 };

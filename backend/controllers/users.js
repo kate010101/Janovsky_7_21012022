@@ -34,10 +34,15 @@ exports.signup = async (req, res, next) => {
                 error: 'Votre mot de passe doit contenir des majuscules, des minisules, deux chiffres minimum et sans espaces',
             });
         }
-        /*** appeler bycrpt et hasher le mot de passe, l'algorithme fera 10 tours***/
-        bcrypt.hash(req.body.password, 10)
-            /*** Création du user ***/
-            .then(hash => {
+         /*** Les chiffres et les symboles ne sont pas autorisés. Minimum 3 caractéres et Maximum 20 caractères ***/
+         const fristNameRegex = /^([A-Za-z]{3,20})?([-]{0,1})?([A-Za-z\s]{3,20})$/;
+         const lastNameRegex = /^([A-Za-z]{3,20})?([-]{0,1})?([A-Za-z\s]{3,20})$/;
+         const mailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+         if (fristNameRegex.test(req.body.firstName) && lastNameRegex.test(req.body.lastName) && mailRegex.test(req.body.email)) {
+             /*** appeler bycrpt et hasher le mot de passe, l'algorithme fera 10 tours***/
+             bcrypt.hash(req.body.password, 10)
+                 /*** Création du user ***/
+                 .then(hash => {
 
                 User.create({
                         firstName: req.body.firstName,
@@ -72,6 +77,11 @@ exports.signup = async (req, res, next) => {
                 error,
                 message: "erreur serveur pour la création du compte"
             }))
+    } else {
+        res.status(400).json({
+            message: " paramètres incorrects, veuillez correctement vos coordonnées "
+        })
+    }
 
     } catch (error) {
         console.log(error)
