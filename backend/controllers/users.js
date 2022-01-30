@@ -113,7 +113,7 @@ exports.login = (req, res, next) => {
 
                         res.status(200).json({
                             user: {
-                                id: user.id,
+                                userId: user.userId,
                                 firstName: user.firstName,
                                 lastName: user.lastName,
                                 email: req.body.email,
@@ -121,10 +121,10 @@ exports.login = (req, res, next) => {
                                 isAdmin: user.isAdmin,
                                 imageUrl: user.imageUrl
                             },
-                            userId: user.id,
+                            userId: user.userId,
                             isAdmin: user.isAdmin,
                             token: jwt.sign({
-                                    userId: user.id,
+                                    userId: user.userId,
                                     isAdmin: user.isAdmin,
                                 },
                                 `${process.env.SECRET_KEY}`, {
@@ -156,11 +156,11 @@ exports.updateProfile = (req, res, next) => {
     };
     User.findOne({
             where: {
-                id: req.params.id
+                userId: req.params.id
             }
         })
         .then(user => {
-            if (user.id !== getAuthUserId(req)) {
+            if (user.userId !== getAuthUserId(req)) {
                 return res.status(401).json({
                     error
                 })
@@ -169,13 +169,13 @@ exports.updateProfile = (req, res, next) => {
                 ...userObject
             }, {
                 where: {
-                    id: req.params.id
+                    userId: req.params.userId
                 }
             })
             .then((user) => res.status(200).json({
                 message: "Profil à jour !",
                 user: {
-                    id: user.id,
+                    userId: user.userId,
                     firstName: user.firstName,
                     lastName: user.lastName,
                     email: user.email,
@@ -193,11 +193,11 @@ exports.updateProfile = (req, res, next) => {
 exports.deleteProfile = (req, res, next) => {
     User.findOne({
             where: {
-                id: req.params.id
+                userId: req.params.id
             }
         })
         .then(user => {
-            if (user.id !== getAuthUserId(req)) {
+            if (user.userId !== getAuthUserId(req)) {
                 return res.status(401).json({
                     error
                 })
@@ -205,11 +205,11 @@ exports.deleteProfile = (req, res, next) => {
             /*** supprimer le user avec la fonction destroy ***/
             user.destroy({
                 where: {
-                    id: req.params.id
+                    userId: req.params.id
                 }
             })
             .then(() => res.status(200).json({
-                message: 'Profil a été supprimé avec succés'
+                message: 'Profil a été supprimé avec succès'
             }))
             .catch(error => res.status(409).json({
                 error
@@ -222,9 +222,9 @@ exports.getProfile = async (req, res, next) => {
     /*** on récupére l'utilisateur depuis la base de données ***/
     try {
         const user = await User.findOne({
-            attributes: ['id', 'firstName', 'lastName', 'email', 'isAdmin', 'imageUrl'],
+            attributes: ['userId', 'firstName', 'lastName', 'email', 'isAdmin', 'imageUrl'],
                 where: {
-                    id: req.params.id
+                    userId: req.params.id
                 }
             })
 
@@ -251,7 +251,7 @@ exports.getProfile = async (req, res, next) => {
 
 exports.getAllProfiles = (req, res, next) => {
     User.findAll({
-            attributes: ['id', 'firstName', 'lastName', 'email', 'imageUrl', 'isAdmin']
+            attributes: ['userId', 'firstName', 'lastName', 'email', 'imageUrl', 'isAdmin']
         })
         .then(users => res.status(200).json({
             users
@@ -266,7 +266,7 @@ exports.adminDeleteProfileUser = (req, res, next) => {
     /*** supprimer le compte d'un user avec destroy ***/
     User.destroy({
             where: {
-                id: req.params.id
+                userId: req.params.id
             }
         })
         .then(() => res.status(200).json({

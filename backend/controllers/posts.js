@@ -17,6 +17,7 @@ exports.createPost = (req, res, next) => {
     if (req.file) {
         Post.create({
                 userId: getAuthUserId(req),
+                title: req.body.title,
                 content: req.body.content,
                 imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
             })
@@ -30,6 +31,7 @@ exports.createPost = (req, res, next) => {
     } else {
         Post.create({
                 userId: getAuthUserId(req),
+                title: req.body.title,
                 content: req.body.content,
                 imageUrl: null,
             })
@@ -47,7 +49,7 @@ exports.createPost = (req, res, next) => {
      Post.findOne({
 
              where: {
-                 id: req.params.id
+                postId: req.params.id
              }
          })
          .then(post => {
@@ -66,7 +68,7 @@ exports.createPost = (req, res, next) => {
                      ...postObject
                  }, {
                      where: {
-                         id: req.params.id 
+                        postId: req.params.id 
                      }
                  })
                  .then(() => res.status(200).json({
@@ -82,7 +84,7 @@ exports.createPost = (req, res, next) => {
  exports.deletePost = (req, res, next) => {
      Post.findOne({
              where: {
-                 id: req.params.id
+                postId: req.params.id
              }
          })
          .then(post => {
@@ -96,7 +98,7 @@ exports.createPost = (req, res, next) => {
                 fs.unlink(`images/${filename}`, () => {
                     post.destroy({
                             where: {
-                                id: req.params.id
+                                postId: req.params.id
                             }
                         })
                         .then(() => res.status(200).json({
@@ -109,7 +111,7 @@ exports.createPost = (req, res, next) => {
             } else {
                  post.destroy({
                          where: {
-                             id: req.params.id
+                            postId: req.params.id
                          }
                      })
                      .then(() => res.status(200).json({
@@ -130,7 +132,7 @@ exports.createPost = (req, res, next) => {
      /*** on récupére id du post depuis la base de données ***/
      Post.findOne({
              where: {
-                 id: req.params.id
+                postId: req.params.id
              }
          })
          .then(post => res.status(200).json({
@@ -166,7 +168,7 @@ exports.createPost = (req, res, next) => {
  exports.adminDeletePost = (req, res, next) => {
      Post.findOne({
              where: {
-                 id: req.params.id
+                postId: req.params.id
              }
          })
          .then(post => {
@@ -175,7 +177,7 @@ exports.createPost = (req, res, next) => {
                 fs.unlink(`images/${filename}`, () => {
                     post.destroy({
                             where: {
-                                id: req.params.id
+                                postId: req.params.id
                             }
                         })
                         .then(() => res.status(200).json({
@@ -188,7 +190,7 @@ exports.createPost = (req, res, next) => {
             } else {
                  post.destroy({
                          where: {
-                             id: req.params.id
+                            postId: req.params.id
                          }
                      })
                      .then(() => res.status(200).json({

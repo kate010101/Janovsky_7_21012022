@@ -163,13 +163,13 @@ export default {
           this.image = response.data.image;
         });
     },
-    async deleteMyAccount(id) {
+    async deleteMyAccount() {
       let confirmDeleteUser = confirm(
-        " la suppresion du compte est irréversible, voulez-vous vraiment supprimer le compte ?"
+        " La suppresion du compte est irréversible, voulez-vous vraiment supprimer le compte ?"
       );
       if (confirmDeleteUser == true) {
         await axios
-          .delete(`http://localhost:3000/api/users/${id}`, {
+          .delete(`http://localhost:3000/api/users/${this.userId}`, {
             headers: {
               Authorization: "Bearer " + this.token,
             },

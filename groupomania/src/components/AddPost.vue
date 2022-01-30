@@ -8,6 +8,20 @@
           enctype="multipart/form-data"
           method="post"
         >
+          <div class="card-title">
+            <label for="title" class="form-label form-control-sm">Titre </label>
+            <textarea
+              class="form-control form-control-sm"
+              rows="1"
+              cols="1"
+              type="text"
+              v-model="title"
+              placeholder="Titre"
+              name="title"
+              id="title"
+              required
+            ></textarea>
+          </div>
           <div class="card-textarea">
             <label for="content" class="form-label form-control-sm"
               >Exprimez-vous !
@@ -67,6 +81,7 @@ export default {
       token: localStorage.getItem("token"),
       userId: localStorage.getItem("userId"),
       image: "",
+      title: "",
       content: "",
       imageUrl: "",
       error: "",
@@ -83,8 +98,10 @@ export default {
       const formData = new FormData();
       formData.append("image", this.image);
       formData.append("userId", parseInt(localStorage.getItem("userId")));
+      formData.append("title", document.getElementById("title").value);
       formData.append("content", document.getElementById("content").value);
       console.log("test", formData.get("image"));
+      console.log("test", formData.get("title"));
       console.log("test", formData.get("content"));
 
       if (formData.get("content") == "") {

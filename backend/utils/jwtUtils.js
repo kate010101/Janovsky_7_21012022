@@ -4,7 +4,7 @@ module.exports = {
     tokenSign: `${process.env.SECRET_KEY}`,
     generateToken: function (user) {
         return jwt.sign({
-                userId: user.id,
+                userId: user.userId,
                 isAdmin: user.isAdmin
             },
             this.tokenSign, {

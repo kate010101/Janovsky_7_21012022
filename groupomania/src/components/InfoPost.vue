@@ -6,9 +6,9 @@
       <div
         class="card-header"
         v-for="user in users.filter((user) => {
-          return user.id == post.userId;
+          return user.userId == post.userId;
         })"
-        :key="user.id"
+        :key="user.userId"
       >
         <img
           v-if="user.imageUrl == null"
@@ -26,6 +26,9 @@
         />
         <span class="card-title">{{ user.firstName }} {{ user.lastName }}</span>
       </div>
+      <p v-if="post.title !== 'null'" class="card-text strong">
+        {{ post.title }}
+      </p>
       <p v-if="post.content !== 'null'" class="card-text">{{ post.content }}</p>
       <div v-if="post.imageUrl">
         <img
@@ -35,13 +38,13 @@
           title="image du post d'un utilisateur"
         />
       </div>
-      <span class="btn-end" v-if="user.id == post.userId">
+      <span class="btn-end" v-if="userId == post.userId">
         <button
           class="btn btn-danger"
           title="supprimer"
           aria-label="bouton supprimer"
           v-bind="post"
-          @click.prevent="deletePublication(post.id)"
+          @click.prevent="deletePublication(post.postId)"
         >
           <i class="fa fa-trash" aria-hidden="true"></i>
         </button>
@@ -269,6 +272,9 @@ export default {
 }
 .card-text {
   margin: 1rem;
+}
+.strong {
+  font-weight: bold;
 }
 .card-title {
   font-weight: 600;
