@@ -279,7 +279,7 @@ export default {
 }
 .card-title {
   font-weight: 600;
-  color: blue;
+  color: #0d6efd;
 }
 .card-paragraph {
   height: 1.7rem;

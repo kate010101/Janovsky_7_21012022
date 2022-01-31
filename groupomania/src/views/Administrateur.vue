@@ -8,7 +8,9 @@
           Vous avez la possiblité de supprimer les utilisateurs et les
           publications pour non-respect du règlement de la communauté
         </p>
-        <p class="card-description description">FAITES LE BON CHOIX</p>
+        <p class="card-description description">
+          SUPPRESSION DE COMPTES ET DE POSTS
+        </p>
         <div class="card-btn">
           <h2 class="card-title-profiles">1-Les comptes personnels</h2>
           <div>
@@ -17,7 +19,11 @@
                 v-bind="user"
                 @deleteProfileUser="getDeleteUser(user.userId)"
               />
-              <button v-bind="user" @click.prevent="getDeleteUser(user.userId)">
+              <button
+                class="btn btn-danger btn-card"
+                v-bind="user"
+                @click.prevent="getDeleteUser(user.userId)"
+              >
                 Supprimer
               </button>
             </div>
@@ -62,8 +68,7 @@
                 <img class="card-img" :src="post.imageUrl" alt="post" />
               </div>
               <button
-                class="btn btn-danger"
-                id="btn-card"
+                class="btn btn-danger btn-card"
                 v-bind="post"
                 @click.prevent="deletePost(post.postId)"
               >
@@ -168,7 +173,7 @@ export default {
 .card-title {
   margin: 1.2rem;
   font-size: 2rem;
-  background-color: #ffc0cb;
+  background-color: rgb(243, 95, 65);
   text-align: center;
 }
 .card-btn {
@@ -181,7 +186,7 @@ export default {
 }
 .description {
   margin: 1rem 0;
-  color: #8b0000;
+  color: #0d6efd;
 }
 .card-profilesList,
 .card-postsList {
@@ -192,8 +197,8 @@ export default {
   margin-top: 1rem;
   font-size: 1.5rem;
   text-decoration: underline;
-  background-color: #ffd700;
-  border: 1px solid #ffd700;
+  background-color: rgb(178, 222, 228);
+  border: 1px solid rgb(178, 222, 228);
 }
 .card-profilesList,
 .card-postsList {
@@ -208,7 +213,7 @@ export default {
   font-weight: 600;
   color: blue;
 }
-#btn-card {
+.btn-card {
   width: 50%;
   margin: 1rem auto;
 }

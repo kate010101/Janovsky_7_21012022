@@ -199,8 +199,8 @@ export default {
   border-radius: 0.25rem;
   font-weight: 600;
   line-height: 1.5;
-  background-color: #0dcaf0;
-  border-color: #0dcaf0;
+  background-color: rgb(178, 222, 228);
+  border-color: rgb(178, 222, 228);
   text-align: center;
   vertical-align: middle;
 }
@@ -223,7 +223,7 @@ export default {
 }
 .text_color {
   margin-left: 0.5rem;
-  color: blue;
+  color: #0d6efd;
   font-weight: 400;
 }
 .label {

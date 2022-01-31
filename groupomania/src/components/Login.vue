@@ -8,7 +8,7 @@
         {{ error }}
       </div>
       <div class="form-group col-md-6">
-        <label for="exampleFormControlInput1" class="white">Email</label>
+        <label for="exampleFormControlInput1" class="color">Email</label>
         <input
           v-model="dataLogin.email"
           type="email"
@@ -19,7 +19,7 @@
         />
       </div>
       <div class="form-group col-md-6">
-        <label for="password" class="white">Mot de passe</label>
+        <label for="password" class="color">Mot de passe</label>
         <input
           v-model="dataLogin.password"
           type="password"
@@ -98,22 +98,27 @@ form {
   border: none;
   border-radius: 5px;
   box-shadow: 2px 2px 5px black;
-  background-color: #122441;
+  background-color: rgb(178, 222, 228);
   .col-md-6 {
     width: 100%;
   }
-  .white {
-    color: white;
+  .color {
+    color: rgb(253, 47, 4);
   }
   .btn-primary {
     margin: 1rem;
     width: 50%;
-    background-color: #8b0000;
-    border-color: #8b0000;
+    background-color: rgb(253, 47, 4);
+    border-color: rgb(253, 47, 4);
+    font-weight: bold;
+    letter-spacing: 0.7px;
   }
   .btn:hover {
-    border-color: #006400;
-    background-color: #006400;
+    border-color: rgb(253, 47, 4);
+    background-color: rgb(250, 231, 178);
+    color: rgb(253, 47, 4);
+    font-weight: bold;
+    letter-spacing: 0.7px;
   }
 }
 .connect {
@@ -130,6 +135,6 @@ form {
 .toconnect {
   cursor: pointer;
   text-decoration: none;
-  color: red;
+  color: rgb(253, 47, 4);
 }
 </style>

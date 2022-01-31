@@ -9,7 +9,9 @@
           method="post"
         >
           <div class="card-title">
-            <label for="title" class="form-label form-control-sm">Titre </label>
+            <label for="title" class="form-label form-control-sm">
+              Titre
+            </label>
             <textarea
               class="form-control form-control-sm"
               rows="1"

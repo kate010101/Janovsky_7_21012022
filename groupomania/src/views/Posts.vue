@@ -33,7 +33,7 @@ export default {
   margin: 1rem;
   text-align: center;
   display: block;
-  background-color: #0dcaf0;
-  border-color: #0dcaf0;
+  background-color: rgb(178, 222, 228);
+  border-color: rgb(178, 222, 228);
 }
 </style> 

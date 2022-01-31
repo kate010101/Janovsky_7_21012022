@@ -30,14 +30,6 @@
           title="picture profile"
         />
       </div>
-      <button
-        class="btn btn-danger"
-        id="btn-card"
-        v-bind="user"
-        @click.prevent="deleteUser($attrs.id)"
-      >
-        Supprimer <i class="fa fa-trash" aria-hidden="true"></i>
-      </button>
     </div>
   </div>
 </template>
@@ -84,7 +76,7 @@ export default {
 
 <style scoped lang="scss">
 .card-header-info {
-  background-color: #ffe4b5;
+  background-color: rgb(250, 231, 178);
 }
 .text {
   margin-left: 0.5rem;
@@ -93,7 +85,7 @@ export default {
 }
 .text_color {
   margin-left: 0.5rem;
-  color: blue;
+  color: #0d6efd;
   font-weight: 400;
 }
 .text-center {

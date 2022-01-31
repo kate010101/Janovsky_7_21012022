@@ -1,9 +1,9 @@
 <template>
   <header>
     <img
-      src="../assets/icon-left-font-monochrome-white.png"
-      width="240"
-      height="240"
+      src="../assets/icon-left-font.png"
+      width="300"
+      height="67"
       alt="le logo de gropomania"
       title="logo groupomania"
       id="logo"
@@ -23,7 +23,7 @@ header {
   display: flex;
   align-items: center;
   height: 5rem;
-  background-color: #122441;
+  background-color: #fff;
   #logo {
     display: block;
     margin-left: auto;

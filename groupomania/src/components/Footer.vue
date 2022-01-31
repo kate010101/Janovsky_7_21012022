@@ -22,12 +22,12 @@ export default {
 footer {
   height: auto;
   width: 100%;
-  background-color: #122441;
+  background-color: #fff;
   margin-top: 15rem;
 
   span,
   #lien {
-    color: white;
+    color: rgb(253, 47, 4);
   }
 }
 </style>

@@ -44,6 +44,6 @@ export default {
 .toconnect {
   cursor: pointer;
   text-decoration: none;
-  color: red;
+  color: rgb(253, 47, 4);
 }
 </style> 

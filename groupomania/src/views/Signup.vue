@@ -8,7 +8,7 @@
         {{ error }}
       </div>
       <div class="form-group col-md-6">
-        <label for="firstName" class="white">Prénom</label>
+        <label for="firstName" class="color">Prénom</label>
         <input
           type="text"
           v-model="firstName"
@@ -19,7 +19,7 @@
         />
       </div>
       <div class="form-group col-md-6">
-        <label for="lastName" class="white">Nom</label>
+        <label for="lastName" class="color">Nom</label>
         <input
           type="text"
           v-model="lastName"
@@ -30,7 +30,7 @@
         />
       </div>
       <div class="form-group col-md-6">
-        <label for="email" class="white">Email</label>
+        <label for="email" class="color">Email</label>
         <input
           type="email"
           v-model="email"
@@ -41,7 +41,7 @@
         />
       </div>
       <div class="form-group col-md-6">
-        <label for="password" class="white">Mot de passe*</label>
+        <label for="password" class="color">Mot de passe*</label>
         <input
           type="password"
           v-model="password"
@@ -149,22 +149,27 @@ form {
   border: none;
   border-radius: 5px;
   box-shadow: 2px 2px 5px black;
-  background-color: #122441;
+  background-color: rgb(178, 222, 228);
   .col-md-6 {
     width: 100%;
   }
-  .white {
-    color: white;
+  .color {
+    color: rgb(253, 47, 4);
   }
   .btn-primary {
     margin: 1rem;
     width: 50%;
-    background-color: #8b0000;
-    border-color: #8b0000;
+    background-color: rgb(253, 47, 4);
+    border-color: rgb(253, 47, 4);
+    font-weight: bold;
+    letter-spacing: 0.7px;
   }
   .btn:hover {
-    border-color: #006400;
-    background-color: #006400;
+    border-color: rgb(253, 47, 4);
+    background-color: rgb(250, 231, 178);
+    color: rgb(253, 47, 4);
+    font-weight: bold;
+    letter-spacing: 0.7px;
   }
 }
 .info {
@@ -184,6 +189,6 @@ form {
 .toconnect {
   cursor: pointer;
   text-decoration: none;
-  color: red;
+  color: rgb(253, 47, 4);
 }
 </style> 
