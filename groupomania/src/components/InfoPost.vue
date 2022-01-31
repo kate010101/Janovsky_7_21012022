@@ -194,6 +194,7 @@ export default {
           .then(() => {
             let i = this.posts.map((data) => data.id).indexOf(id);
             this.posts.splice(i, 1);
+            location.reload();
           });
       } else {
         return;

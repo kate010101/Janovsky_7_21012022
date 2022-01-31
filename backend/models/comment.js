@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true
     },
-    content: DataTypes.STRING,
+    content: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Comment',

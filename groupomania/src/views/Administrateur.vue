@@ -15,8 +15,11 @@
             <div class="card-profilesList" :key="user.id" v-for="user in users">
               <ProfilesList
                 v-bind="user"
-                @deleteProfileUser="getDeleteUser()"
+                @deleteProfileUser="getDeleteUser(user.userId)"
               />
+              <button v-bind="user" @click.prevent="getDeleteUser(user.userId)">
+                Supprimer
+              </button>
             </div>
           </div>
           <h2 class="card-title-profiles">2-Publications</h2>
@@ -62,7 +65,7 @@
                 class="btn btn-danger"
                 id="btn-card"
                 v-bind="post"
-                @click.prevent="deletePost(post.id)"
+                @click.prevent="deletePost(post.postId)"
               >
                 Supprimer
               </button>
@@ -108,7 +111,6 @@ export default {
         alert(error);
         console.log(error);
       });
-
     await axios
       .get("http://localhost:3000/api/posts", {
         headers: {
@@ -133,13 +135,12 @@ export default {
           },
         })
         .then(() => {
-          let i = this.posts.map((data) => data.id).indexOf(id);
-          this.posts.splice(i, 1);
+          location.reload();
         });
     },
-    async getDeleteUser() {
+    async getDeleteUser(userId) {
       await axios
-        .get("http://localhost:3000/api/users", {
+        .delete(`http://localhost:3000/api/admin/delete/${userId}`, {
           headers: {
             Authorization: "Bearer " + this.token,
           },
@@ -147,6 +148,9 @@ export default {
         .then((response) => {
           this.users = response.data.users;
           console.log(this.users);
+        })
+        .then(() => {
+          location.reload();
         })
         .catch(function (error) {
           alert(error);
