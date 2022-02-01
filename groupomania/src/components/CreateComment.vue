@@ -1,13 +1,15 @@
 <template>
   <div class="blocComment">
     <form class="mt-3">
-      <input
+      <textarea
         v-bind="$attrs"
         class="content"
         name="content"
         ref="content"
         placeholder="Tapez un commentaire !"
-      />
+      >
+      </textarea>
+      <div>L'id du post est :{{ $props.postId }}</div>
       <span id="btn-publication">
         <button
           type="submit"
@@ -15,7 +17,7 @@
           aria-label="créer un commentaire"
           class="btn btn-primary"
           v-bind="$attrs"
-          @click.prevent="postComment()"
+          @click.prevent="postComment($props.postId)"
           ref="comment"
         >
           <i class="far fa-paper-plane"></i>
@@ -33,18 +35,21 @@ export default {
       userId: localStorage.getItem("userId"),
       token: localStorage.getItem("token"),
       post: {},
-      postId: "",
       content: "",
       comment: {},
       comments: [],
     };
   },
+  props: {
+    postId: Number,
+  },
+
   methods: {
-    postComment() {
+    postComment(postId) {
       axios
         .post("http://localhost:3000/api/comments", {
           userId: localStorage.getItem("userId"),
-          postId: this.$refs.comment.id,
+          postId: postId,
           content: this.$refs.content.value,
 
           headers: {

@@ -7,6 +7,7 @@ fs = require('fs')
 
 /***Création  d'un commentaire ***/
 exports.createComment = (req, res, next) => {
+    console.log("commentaire:", JSON.stringify(req.body) )
     if (!req.body.content) {
         res.status(400).send({
             message: "impossible de publier un commentaire vide !"

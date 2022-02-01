@@ -99,7 +99,11 @@
           </div>
         </div>
 
-        <CreateComment v-bind="post" @postCommentResponse="getComments()" />
+        <CreateComment
+          v-bind="post"
+          :postId="post.postId"
+          @postCommentResponse="getComments()"
+        />
       </div>
     </div>
   </div>
@@ -119,6 +123,7 @@ export default {
     return {
       showComments: false,
       userId: localStorage.getItem("userId"),
+      postId: 5,
       token: localStorage.getItem("token"),
       users: [],
       user: {
