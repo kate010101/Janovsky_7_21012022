@@ -9,7 +9,7 @@
         placeholder="Tapez un commentaire !"
       >
       </textarea>
-      <div>L'id du post est :{{ $props.postId }}</div>
+      <!--<div>L'id du post est :{{ $props.postId }}</div>-->
       <span id="btn-publication">
         <button
           type="submit"
@@ -70,8 +70,9 @@ export default {
 };
 </script>
 <style scoped lang="css">
-.blocComment input {
+.blocComment textarea {
   border: none;
+  width: 100%;
 }
 @media screen and (min-width: 768px) {
   input {

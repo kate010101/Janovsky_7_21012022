@@ -44,7 +44,7 @@ exports.getComments = (req, res, next) => {
 exports.deleteComment = (req, res, next) => {
     Comment.findOne({
             where: {
-                id: req.params.id
+                commentId: req.params.id
             }
         })
         .then(comment => {

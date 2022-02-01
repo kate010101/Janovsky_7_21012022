@@ -2,7 +2,7 @@
   <div v-if="user.isAdmin || userId">
     <AddPost @postResponse="getPosts()" />
     <!-- On récupére les posts des plus récents aux plus anciens -->
-    <div class="card" :key="post.id" v-for="post in posts.slice().reverse()">
+    <div class="card" :key="post.postId" v-for="post in posts.slice()">
       <div
         class="card-header"
         v-for="user in users.filter((user) => {
@@ -57,15 +57,15 @@
           <div
             class="card-comment"
             v-for="comment in comments.filter((comment) => {
-              return comment.postId == post.id;
+              return comment.postId == post.postId;
             })"
-            :key="comment.id"
+            :key="comment.commentId"
           >
             <p
               v-for="user in users.filter((user) => {
-                return user.id == comment.userId;
+                return user.userId == comment.userId;
               })"
-              :key="user.id"
+              :key="user.userId"
             >
               <img
                 v-if="user.imageUrl == null"
@@ -86,12 +86,12 @@
               >
             </p>
             <p class="card-description comment">{{ comment.content }}</p>
-            <div v-if="comment.userId == user.id" id="btn-trash">
+            <div v-if="comment.userId == user.userId" id="btn-trash">
               <button
                 class="btn-secondary"
                 title="supprimer le commentaire"
                 aria-label="bouton supprimer un commentaire"
-                @click.prevent="deleteComment(comment.id)"
+                @click.prevent="deleteComment(comment.commentId)"
               >
                 <i class="fa fa-trash" aria-hidden="true"></i>
               </button>
@@ -102,7 +102,7 @@
         <CreateComment
           v-bind="post"
           :postId="post.postId"
-          @postCommentResponse="getComments()"
+          @postCommentResponse="getComments(comment.commentId)"
         />
       </div>
     </div>
@@ -123,11 +123,10 @@ export default {
     return {
       showComments: false,
       userId: localStorage.getItem("userId"),
-      postId: 5,
       token: localStorage.getItem("token"),
       users: [],
       user: {
-        id: localStorage.getItem("userId"),
+        userId: localStorage.getItem("userId"),
         isAdmin: localStorage.getItem("isAdmin"),
       },
       post: {},
@@ -135,6 +134,9 @@ export default {
       comment: {},
       comments: [],
     };
+  },
+  props: {
+    postId: Number,
   },
   async created() {
     await axios
@@ -185,40 +187,41 @@ export default {
   },
 
   methods: {
-    async deletePublication(id) {
+    async deletePublication(postId) {
       let confirmDeletePost = confirm(
-        "voulez-vous vraiment supprimer votre publication ?"
+        "Voulez-vous vraiment supprimer votre publication ?"
       );
       if (confirmDeletePost == true) {
         await axios
-          .delete(`http://localhost:3000/api/posts/${id}`, {
+          .delete(`http://localhost:3000/api/posts/${postId}`, {
             headers: {
               Authorization: "Bearer " + this.token,
             },
           })
           .then(() => {
-            let i = this.posts.map((data) => data.id).indexOf(id);
+            let i = this.posts.map((data) => data.postId).indexOf(postId);
             this.posts.splice(i, 1);
-            location.reload();
           });
       } else {
         return;
       }
     },
-    async deleteComment(id) {
+    async deleteComment(commentId) {
       let confirmDeleteComment = confirm(
-        "voulez-vous vraiment supprimer votre commentaire ?"
+        "Voulez-vous vraiment supprimer votre commentaire ?"
       );
       if (confirmDeleteComment == true) {
         await axios
-          .delete(`http://localhost:3000/api/comments/${id}`, {
+          .delete(`http://localhost:3000/api/comments/${commentId}`, {
             headers: {
               "Content-Type": "application/json",
               Authorization: "Bearer " + this.token,
             },
           })
           .then(() => {
-            let i = this.comments.map((data) => data.id).indexOf(id);
+            let i = this.comments
+              .map((data) => data.commentId)
+              .indexOf(commentId);
             this.comments.splice(i, 1);
           });
       } else {
