@@ -30,6 +30,21 @@
         {{ post.title }}
       </p>
       <p v-if="post.content !== 'null'" class="card-text">{{ post.content }}</p>
+      <!--
+      <a :href="post.content">Vidéo</a>
+      -->
+
+      <!--
+      <iframe
+        id="lienvideo"
+        width="420"
+        height="236"
+        :src="post.content"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+      -->
       <div v-if="post.imageUrl">
         <img
           class="card-img"
@@ -267,6 +282,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.iframe {
+  display: contents;
+}
 .card {
   width: 50%;
   margin: auto;

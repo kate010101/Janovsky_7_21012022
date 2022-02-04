@@ -1,6 +1,10 @@
 <template>
   <nav class="navbar navbar-light expand-lg">
-    <a class="navbar-brand" href="#" alt="logo du site" title="logo du site"
+    <router-link
+      class="navbar-brand"
+      to="/posts"
+      alt="logo du site"
+      title="logo du site"
       ><img
         src="../assets/icon-left-font.png"
         width="330"
@@ -8,21 +12,10 @@
         alt="le logo de gropomania"
         title="logo groupomania"
         id="logo"
-    /></a>
+    /></router-link>
 
     <div>
       <ul class="nav">
-        <li class="nav-item active">
-          <router-link
-            to="/posts"
-            aria-label="page des publications"
-            alt="voir le forum"
-            title="voir le forum"
-            type="button"
-            class="nav-link"
-            ><i class="fas fa-home"></i
-          ></router-link>
-        </li>
         <li class="nav-item">
           <router-link
             aria-label="voir son compte"
