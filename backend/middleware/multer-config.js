@@ -7,6 +7,17 @@ const MIME_TYPES = {
     'image/png': 'png',
     'image/gif': 'gif',
     "image/webp": "webp",
+    /*"image/mpeg3": "mp3",
+    "image/mpeg": "mpeg",
+    "image/wave": "wave",
+    "image/wav": "wav",
+    "image/mpeg3": "mp3",
+    "image/mpeg4": "mp4",
+    "image/avi": "avi",
+    "image/wmv": "wmv",
+    "image/mov": "mov",
+    "image/mkv": "mkv",
+    "image/flv": "flv",*/
 };
 /*** création d'un objet de configuration pour indique à multer où enregistrer les fichiers images et les renommer ***/
 const storage = multer.diskStorage({
@@ -27,6 +38,7 @@ const storage = multer.diskStorage({
         callback(null, name + Date.now() + '.' + extension);
     }
 });
+
 /*** on exporte multer, on lui passe l'objet storage,
  *  on appelle la méthode single pour indiquer que c'est un fichier uniquement d'image ***/
 module.exports = multer({
