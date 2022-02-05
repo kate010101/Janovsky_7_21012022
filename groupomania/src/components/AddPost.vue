@@ -1,74 +1,83 @@
 <template>
   <div class="card">
-    <div class="card-body col d-flex justify-content-center">
-      <main>
-        <form
-          class="container text-center form-group"
-          @submit.prevent="addPost()"
-          enctype="multipart/form-data"
-          method="post"
-        >
-          <div class="card-title">
-            <label for="title" class="form-label form-control-sm">
-              Titre
-            </label>
-            <textarea
-              class="form-control form-control-sm"
-              rows="1"
-              cols="1"
-              type="text"
-              v-model="title"
-              placeholder="Titre"
-              name="title"
-              id="title"
-              required
-            ></textarea>
-          </div>
-          <div class="card-textarea">
-            <label for="content" class="form-label form-control-sm"
-              >Exprimez-vous !
-            </label>
-            <textarea
-              class="form-control form-control-sm"
-              rows="5"
-              cols="20"
-              type="text"
-              v-model="content"
-              placeholder="Postez!"
-              name="content"
-              id="content"
-              required
-            ></textarea>
-          </div>
-          <div class="card-body d-flex flex-column justify-content-between">
-            <label for="image" class="form-control-label"
-              ><strong>Partager une image</strong></label
-            ><br />
-            <input
-              type="file"
-              class="form-control"
-              name="image"
-              id="image"
-              ref="image"
-              aria-describedby="image"
-              @change="selectFile()"
-            />
-          </div>
-          <div class="card-body mx-auto">
-            <button
-              type="submit"
-              id="btnP"
-              class="btn btn-primary"
-              @click.prevent="addPost"
-            >
-              Publier
-            </button>
-          </div>
-        </form>
-      </main>
-    </div>
-    <div v-if="error" class="alert alert-danger" role="altert" id="msgError">
-      {{ error }}
+    <button
+      class="btn btn-primary collapsible"
+      @click="showAddPost = !showAddPost"
+    >
+      <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+      Créez un nouveau Post !
+    </button>
+    <div v-if="showAddPost">
+      <div class="card-body col d-flex justify-content-center">
+        <main>
+          <form
+            class="container text-center form-group"
+            @submit.prevent="addPost()"
+            enctype="multipart/form-data"
+            method="post"
+          >
+            <div class="card-title">
+              <label for="title" class="form-label form-control-sm">
+                Titre
+              </label>
+              <textarea
+                class="form-control form-control-sm"
+                rows="1"
+                cols="1"
+                type="text"
+                v-model="title"
+                placeholder="Titre"
+                name="title"
+                id="title"
+                required
+              ></textarea>
+            </div>
+            <div class="card-textarea">
+              <label for="content" class="form-label form-control-sm"
+                >Exprimez-vous !
+              </label>
+              <textarea
+                class="form-control form-control-sm"
+                rows="5"
+                cols="20"
+                type="text"
+                v-model="content"
+                placeholder="Postez!"
+                name="content"
+                id="content"
+                required
+              ></textarea>
+            </div>
+            <div class="card-body d-flex flex-column justify-content-between">
+              <label for="image" class="form-control-label"
+                ><strong>Partager une image</strong></label
+              ><br />
+              <input
+                type="file"
+                class="form-control"
+                name="image"
+                id="image"
+                ref="image"
+                aria-describedby="image"
+                @change="selectFile()"
+              />
+            </div>
+            <div class="card-body mx-auto">
+              <button
+                type="submit"
+                id="btnP"
+                class="btn btn-primary"
+                @click.prevent="addPost"
+              >
+                Publier
+              </button>
+            </div>
+          </form>
+        </main>
+      </div>
+      <div v-if="error" class="alert alert-danger" role="altert" id="msgError">
+        {{ error }}
+      </div>
     </div>
   </div>
 </template>
@@ -80,6 +89,7 @@ export default {
 
   data() {
     return {
+      showAddPost: false,
       token: localStorage.getItem("token"),
       userId: localStorage.getItem("userId"),
       image: "",
@@ -128,6 +138,14 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+.fa.fa-newspaper-o {
+  font-size: 25px;
+  margin-right: 15px;
+}
+.collapsible {
+  display: flex;
+  justify-content: center;
+}
 .card {
   width: 50%;
   margin: auto;
