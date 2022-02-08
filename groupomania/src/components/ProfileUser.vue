@@ -6,35 +6,45 @@
           <h1 class="col-titleprofile">Gérer votre compte</h1>
         </div>
         <section class="row">
-          <div class="col-12">
-            <div
-              class="card bg-light my-3 class=center-block"
-              style="float: none"
-            >
-              <div class="card-header">
-                <div v-bind="user" class="row justify-content-around">
-                  <div class="card-header-info">Vos informations</div>
-                  <p class="text">
-                    Prénom:
-                    <span class="text_color">{{ user.firstName }}</span>
-                  </p>
-                  <p class="text">
-                    Nom:
-                    <span class="text_color">{{ user.lastName }}</span>
-                  </p>
-                  <p class="text">
-                    Email:
-                    <span class="text_color">{{ user.email }}</span>
-                  </p>
+          <form
+            id="form"
+            enctype="multipart/form-data"
+            @submit.prevent="updatePicture()"
+          >
+            <div class="col-12">
+              <div
+                class="card bg-light my-3 class=center-block"
+                style="float: none"
+              >
+                <div class="card-header">
+                  <div v-bind="user" class="row justify-content-around">
+                    <div class="card-header-info">Vos informations</div>
+                    <p class="text">
+                      Prénom:
+                      <input
+                        type="text"
+                        v-model="user.firstName"
+                        name="firstName"
+                        required
+                      />
+                    </p>
+                    <p class="text">
+                      Nom:
+                      <input
+                        type="text"
+                        v-model="user.lastName"
+                        name="lastName"
+                        required
+                      />
+                    </p>
+                    <p class="text">
+                      Email:
+                      <span class="text_color">{{ user.email }}</span>
+                    </p>
+                  </div>
                 </div>
-              </div>
 
-              <div>
-                <form
-                  id="form"
-                  enctype="multipart/form-data"
-                  @submit.prevent="updatePicture()"
-                >
+                <div>
                   <div class="card-body text-center" v-bind="user">
                     <div
                       v-if="user.imageUrl == null"
@@ -82,19 +92,20 @@
                       </button>
                     </div>
                   </div>
-                </form>
-                <div>
-                  <button
-                    class="form-control btn btn-danger"
-                    v-bind="user"
-                    @click.prevent="deleteMyAccount(user.id)"
-                  >
-                    Supprimer
-                  </button>
+
+                  <div>
+                    <button
+                      class="form-control btn btn-danger"
+                      v-bind="user"
+                      @click.prevent="deleteMyAccount(user.id)"
+                    >
+                      Supprimer
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </form>
         </section>
       </div>
     </div>
@@ -146,7 +157,7 @@ export default {
       const formData = new FormData();
       formData.append("userId", parseInt(localStorage.getItem("userId")));
       formData.append("image", this.image);
-      formData.append("imageUrl", this.imageUrl);
+      formData.append("user", JSON.stringify(this.user));
       console.log(this.image);
       console.log(this.imageUrl);
       console.log("test-récup", formData.get("imageUrl"));

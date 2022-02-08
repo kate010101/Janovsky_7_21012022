@@ -148,12 +148,8 @@ exports.login = (req, res, next) => {
 
 /*** Modifier le profile ***/
 exports.updateProfile = (req, res, next) => {
-    const userObject = req.file ? {
-        ...req.body.user,
-        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-    } : {
-        ...req.body
-    };
+    console.log("Voici mon body modifié *********************" , req.body)
+    
     User.findOne({
             where: {
                 userId: req.params.id
@@ -165,22 +161,26 @@ exports.updateProfile = (req, res, next) => {
                     error
                 })
             }
-            user.update({
-                ...userObject
-            }, {
+            user.lastName=JSON.parse(req.body.user).lastName;
+            user.firstName=JSON.parse(req.body.user).firstName;
+            const imageUrl= user.imageUrl;
+            (req.file) ? user.imageUrl= `${req.protocol}://${req.get('host')}/images/${req.file.filename}`:imageUrl;
+
+            User.update(
+                {
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    imageUrl: user.imageUrl
+                }
+            , {
                 where: {
-                    userId: req.params.userId
+                    userId: req.params.id
                 }
             })
             .then((user) => res.status(200).json({
                 message: "Profil à jour !",
                 user: {
-                    userId: user.userId,
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                    email: user.email,
-                    isAdmin: user.isAdmin,
-                    imageUrl: user.imageUrl
+                    ...user
                 }
 
             }))
