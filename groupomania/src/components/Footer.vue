@@ -27,7 +27,7 @@ footer {
 
   span,
   #lien {
-    color: rgb(253, 47, 4);
+    color: #791602;
   }
 }
 </style>

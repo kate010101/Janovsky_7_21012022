@@ -70,7 +70,9 @@ export default {
           localStorage.setItem("isAdmin", response.data.isAdmin);
           this.$router.push("/posts");
         })
-        .catch(() => (this.error = "email/password invalide !"));
+        .catch(
+          () => (this.error = "Merci de vérifier votre email et mot de passe")
+        );
     },
   },
 };
@@ -103,20 +105,21 @@ form {
     width: 100%;
   }
   .color {
-    color: rgb(253, 47, 4);
+    color: #791602;
+    font-weight: bold;
   }
   .btn-primary {
     margin: 1rem;
     width: 50%;
-    background-color: rgb(253, 47, 4);
-    border-color: rgb(253, 47, 4);
+    background-color: #da2d01;
+    border-color: #da2d01;
     font-weight: bold;
     letter-spacing: 0.7px;
   }
   .btn:hover {
     border-color: rgb(253, 47, 4);
     background-color: rgb(250, 231, 178);
-    color: rgb(253, 47, 4);
+    color: #791602;
     font-weight: bold;
     letter-spacing: 0.7px;
   }

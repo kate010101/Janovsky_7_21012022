@@ -26,6 +26,7 @@
                         v-model="user.firstName"
                         name="firstName"
                         required
+                        aria-label="Corriger son prénom"
                       />
                     </p>
                     <p class="text">
@@ -35,6 +36,7 @@
                         v-model="user.lastName"
                         name="lastName"
                         required
+                        aria-label="Corriger son nom"
                       />
                     </p>
                     <p class="text">
