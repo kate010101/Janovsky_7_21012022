@@ -1,5 +1,1 @@
-node_modules
-.env
-config
 images
-initialization_database.sql
