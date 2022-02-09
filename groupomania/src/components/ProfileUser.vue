@@ -175,6 +175,7 @@ export default {
           this.user = response.data.user;
           this.image = response.data.image;
         });
+      location.reload();
     },
     async deleteMyAccount() {
       let confirmDeleteUser = confirm(
