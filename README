@@ -26,6 +26,9 @@ Installation
 
     Pour créer la base de données et ses tables, vous devez :
 
+        Changer les informations dans .env comme DB_PASSWORD:'Indiquez votre mot de passe' 
+        et DB_USERNAME si 'root' n'est pas le nom utilisateur choisi pour la database.
+
         Ouvrir un autre terminal, connectez-vous à votre serveur MySQL
 
         Pour créer une base de données dans MySQL :

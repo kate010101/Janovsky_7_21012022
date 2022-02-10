@@ -4,7 +4,7 @@ const mysql = require('mysql2');
 
 const path = require("path");
 
-/*** importer helmet pour sécuriser HTTP headers ***/
+/*** importer helmet pour sécuriser des principales vulnérabilités ***/
 
 const helmet = require("helmet");
 
@@ -57,7 +57,7 @@ app.use('/api', userRoutes);
 app.use('/api', postRoutes);
 app.use('/api', commentRoutes);
 
-/*** securisé les en-têtes HTTP ***/
+/*** securiser des principales vulnérabilités ***/
 app.use(helmet());
 /*** Cette limite de 40 requêtes toutes les 10 minutes sera effective sur toutes les routes ***/
 app.use(limiter);
