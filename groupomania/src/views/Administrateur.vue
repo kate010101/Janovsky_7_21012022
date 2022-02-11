@@ -34,7 +34,7 @@
             <div
               :key="post.id"
               class="card-postsList"
-              v-for="post in posts.slice().reverse()"
+              v-for="post in posts.slice()"
             >
               <div
                 class="card-header"
