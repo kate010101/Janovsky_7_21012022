@@ -17,11 +17,11 @@ Installation
 
     Accédez sur https://nodejs.org/en/ pour télécharger puis installer Node.js sur votre machine
     cd Backend:
-        Chargez le package nodemon : npm install -g nodemon
+        Chargez le package nodemon : npm install --save -g nodemon
         Pour installer Express.js, exécutez la commande : npm install --save express
         pour le téléchargement de fichiers, installez le package Multer : npm install --save multer
-        Lancez les commandes: npm i fs, npm install body-parser
-	Enfin pour plus de faliciter, tapez : npm install
+        Lancez les commandes: npm i fs, npm install --save body-parser
+	Enfin pour plus de faliciter, tapez : npm install --save
 
 
     Pour créer la base de données et ses tables, vous devez :
@@ -53,12 +53,15 @@ Installation
     Pour se placer dans le dossier groupomania = "cd groupomania" puis :
 
             Tapez : npm install --save
+            Puis : npm run serve.
+
+        Si des messages d'erreurs s'affichent (manque de modules), procédez comme ci-dessous. 
             
-        Installez Vue CLI et cli-service : npm install -g @vue/cli et npm install @vue/cli-service -g
+        Installez Vue CLI et cli-service : npm install --save -g @vue/cli et npm install --save @vue/cli-service -g
         
-            Exécuter la commande npm install pour installer tous les modules nécessaires au fonctionnement de l'application.
-            Installez Axios : npm install axios
-            Installez Bootstrap : npm install vue bootstrap bootstrap-vue
+            Exécuter la commande npm install --save pour installer tous les modules nécessaires au fonctionnement de l'application.
+            Installez Axios : npm install --save axios
+            Installez Bootstrap : npm install --save vue bootstrap bootstrap-vue
             Lancez la commande npm run serve
 
     Le serveur est accessible en local via le port 8080: http://localhost:8080/
