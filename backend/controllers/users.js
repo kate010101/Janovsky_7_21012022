@@ -14,6 +14,7 @@ const fs = require('fs');
 const jwt = require('jsonwebtoken');
 /*** importer le package mot de passe pour exiger aux utilisateurs d'utiliser des mots de passes avec des majuscules, minuscules, chiffres et caractères spéciaux  ***/
 const passwordValidator = require('password-validator');
+const emailValidator = require("email-validator");
 
 /*** Créer le schéma pour garantir plus de sécurité aux mots de passes des utilisateurs ***/
 const schema = new passwordValidator();
@@ -29,6 +30,22 @@ schema
 exports.signup = async (req, res, next) => {
     /*** si le mot de passe du visiteur ne respecte pas le schéma password ***/
     try {
+        User.findOne({
+            where: {
+                email: req.body.email
+            }
+        })
+        .then((user) => {
+            if (user) {
+                return res.status(404).json({
+                    message: 'Utilisateur déjà dans la base'
+                });
+            }
+            
+        // Vérification du format de l'adresse mail
+        if (!emailValidator.validate(req.body.email)) {
+        return res.status(401).json({ message: "Veuillez entrer une adresse email valide" });
+        }
         if (!schema.validate(req.body.password)) {
             return res.status(400).json({
                 error: 'Votre mot de passe doit contenir des majuscules, des minisules, deux chiffres minimum et sans espaces',
@@ -82,10 +99,14 @@ exports.signup = async (req, res, next) => {
                 message: " paramètres incorrects, veuillez correctement vos coordonnées "
             })
         }
+    })
+    .catch(error => res.status(500).json({
+        error
+    }));
     } catch (error) {
         console.log(error)
     }
-}
+}   
 
 
 /***POST/api/auth/login /connecter les utilisateurs existants ***/

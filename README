@@ -51,6 +51,9 @@ Frontend (groupomania) :
 Installation
 
     Pour se placer dans le dossier groupomania = "cd groupomania" puis :
+
+            Tapez : npm install --save
+            
         Installez Vue CLI et cli-service : npm install -g @vue/cli et npm install @vue/cli-service -g
         
             Exécuter la commande npm install pour installer tous les modules nécessaires au fonctionnement de l'application.

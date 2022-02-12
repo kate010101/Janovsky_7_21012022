@@ -120,7 +120,9 @@ export default {
             this.$router.push("/posts");
           })
           .catch(
-            () => (this.error = "Veuillez remplir les bons coordonnées !")
+            () =>
+              (this.error =
+                "Veuillez remplir les bons coordonnées et/ou cet email est déjà utilisé")
           );
     },
   },

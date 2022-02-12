@@ -1,6 +1,6 @@
 'use strict';
 const {
-  Model
+  Model, UniqueConstraintError
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -20,7 +20,10 @@ module.exports = (sequelize, DataTypes) => {
     imageUrl: DataTypes.STRING,
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
-    email: DataTypes.STRING,
+    email: {
+      type: DataTypes.STRING,
+      unique: true
+    },
     password: DataTypes.STRING,
     isAdmin: DataTypes.BOOLEAN
   }, {
