@@ -61,7 +61,7 @@ Installation
         
             Exécuter la commande npm install --save pour installer tous les modules nécessaires au fonctionnement de l'application.
             Installez Axios : npm install axios --save
-            Installez Bootstrap : npm instal vue bootstrap bootstrap-vue --save
+            Installez Bootstrap : npm install vue bootstrap bootstrap-vue --save
             Lancez la commande npm run serve
 
     Le serveur est accessible en local via le port 8080: http://localhost:8080/
