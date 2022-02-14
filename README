@@ -17,10 +17,10 @@ Installation
 
     Accédez sur https://nodejs.org/en/ pour télécharger puis installer Node.js sur votre machine
     cd Backend:
-        Chargez le package nodemon : npm install --save -g nodemon
-        Pour installer Express.js, exécutez la commande : npm install --save express
-        pour le téléchargement de fichiers, installez le package Multer : npm install --save multer
-        Lancez les commandes: npm i fs, npm install --save body-parser
+        Chargez le package nodemon : npm install -g nodemon --save
+        Pour installer Express.js, exécutez la commande : npm install express --save
+        pour le téléchargement de fichiers, installez le package Multer : npm install multer --save
+        Lancez les commandes: npm i fs, npm install body-parser --save
 	Enfin pour plus de faliciter, tapez : npm install --save
 
 
@@ -57,11 +57,11 @@ Installation
 
         Si des messages d'erreurs s'affichent (manque de modules), procédez comme ci-dessous. 
             
-        Installez Vue CLI et cli-service : npm install --save -g @vue/cli et npm install --save @vue/cli-service -g
+        Installez Vue CLI et cli-service : npm install -g @vue/cli --save et npm install @vue/cli-service -g --save
         
             Exécuter la commande npm install --save pour installer tous les modules nécessaires au fonctionnement de l'application.
-            Installez Axios : npm install --save axios
-            Installez Bootstrap : npm install --save vue bootstrap bootstrap-vue
+            Installez Axios : npm install axios --save
+            Installez Bootstrap : npm instal vue bootstrap bootstrap-vue --save
             Lancez la commande npm run serve
 
     Le serveur est accessible en local via le port 8080: http://localhost:8080/
